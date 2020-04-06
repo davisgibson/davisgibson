@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/mackenzie', 'MackenzieController@show');
+Route::get('/mackenzie/loveyou', 'MackenzieController@love');
