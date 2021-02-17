@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Task;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,4 +38,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class)->withPivot('complete_at');
+    }
+
+    public function getTodaysTasksAttribute()
+    {
+        return $this->tasks()->whereDate('complete_at', Carbon::today())->orderBy('complete_at', 'desc')->get();
+    }
+
+    public function getUpcomingTasksAttribute()
+    {
+        return $this->tasks()->whereDate('complete_at', '>', Carbon::today())->orderBy('complete_at', 'desc')->get();
+    }
 }

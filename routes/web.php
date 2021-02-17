@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 
-Route::get('/mackenzie', 'MackenzieController@show');
-Route::get('/mackenzie/loveyou', 'MackenzieController@love');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/tasks', 'TaskController@index')->name('tasks');
+Route::get('/tasks/create', 'TaskController@create');
+Route::post('/tasks/create', 'TaskController@store');
+Route::get('/tasks/{task}/complete', 'TaskController@complete');
+Route::get('/tasks/{task}/edit', 'TaskController@edit');
+Route::put('/tasks/{task}', 'TaskController@update');
+Route::delete('/tasks/{task}', 'TaskController@delete');
