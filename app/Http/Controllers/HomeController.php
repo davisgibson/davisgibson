@@ -27,4 +27,9 @@ class HomeController extends Controller
             'home' => $request->user()->home,
         ]);
     }
+
+    public function dashboard(Request $request)
+    {
+        return view('home');
+    }
 }
