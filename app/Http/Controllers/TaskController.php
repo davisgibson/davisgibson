@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function __contstruct()
+    public function __construct()
     {
     	return $this->middleware('auth');
     }
