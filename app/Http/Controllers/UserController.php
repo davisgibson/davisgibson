@@ -29,7 +29,7 @@ class UserController extends Controller
     		'key' => 'required|exists:homes',
     	]);
 
-    	$request->user()->update(['home_id' => Home::findKey($request->key)]);
+    	$request->user()->update(['home_id' => Home::findKey($request->key)->id]);
 
     	return redirect('/home');
     }

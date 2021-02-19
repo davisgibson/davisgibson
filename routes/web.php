@@ -28,6 +28,7 @@ Route::put('/tasks/{task}', 'TaskController@update');
 Route::delete('/tasks/{task}', 'TaskController@delete');
 
 Route::get('/onboarding', 'UserController@onboarding');
+Route::put('/onboarding/assign', 'UserController@assignHome');
 Route::get('/onboarding/code', 'UserController@code');
 Route::post('/onboarding/code', 'UserController@assignHome');
 Route::post('/onboarding/create', 'UserController@newHome');
