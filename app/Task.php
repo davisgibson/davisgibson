@@ -14,6 +14,11 @@ class Task extends Model
     	return $this->belongsTo(Frequency::class);
     }
 
+    public function home()
+    {
+        return $this->belongsTo(Home::class);
+    }
+
     public function assigneesLog()
     {
     	return $this->belongsToMany(User::class)->withPivot(['is_complete', 'complete_at'])->withTimestamps();
@@ -32,7 +37,7 @@ class Task extends Model
 			return false;
     }
 
-    public function getNextUserAttribute()
+    public function getNextUserInRotationAttribute()
     {
     	if($this->last_assignee)
     		return $this->assigneesLog()->orderBy('complete_at', 'desc')->distinct('user_id')->first();
@@ -46,5 +51,15 @@ class Task extends Model
     		return Carbon::parse($this->last_assignee->pivot->complete_at);
     	else
     		return false;
+    }
+
+    public function getCurrentAssigneeAttribute()
+    {
+        return $this->assigneesLog()->where('complete_at', '>', Carbon::yesterday())->orderBy('complete_at', 'asc')->first();
+    }
+
+    public function getHasEveryoneDoneThisAttribute()
+    {
+        return $this->assigneesLog()->distinct('user_id')->pluck('user_id')->diffKeys($this->home->users()->pluck('id'))->count();
     }
 }

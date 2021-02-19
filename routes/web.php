@@ -26,3 +26,10 @@ Route::get('/tasks/{task}/complete', 'TaskController@complete');
 Route::get('/tasks/{task}/edit', 'TaskController@edit');
 Route::put('/tasks/{task}', 'TaskController@update');
 Route::delete('/tasks/{task}', 'TaskController@delete');
+
+Route::get('/onboarding', 'UserController@onboarding');
+Route::get('/onboarding/code', 'UserController@code');
+Route::post('/onboarding/code', 'UserController@assignHome');
+Route::post('/onboarding/create', 'UserController@newHome');
+
+Route::get('/myhome', 'HomeController@index');

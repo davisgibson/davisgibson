@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'is_admin'
+        'name', 'email', 'password', 'phone', 'is_admin', 'home_id'
     ];
 
     /**
@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Task::class)->withPivot('complete_at');
     }
 
+    public function home()
+    {
+        return $this->belongsTo(Home::class);
+    }
+
     public function getTodaysTasksAttribute()
     {
         return $this->tasks()->whereDate('complete_at', Carbon::today())->orderBy('complete_at', 'desc')->get();
@@ -52,5 +57,10 @@ class User extends Authenticatable
     public function getUpcomingTasksAttribute()
     {
         return $this->tasks()->whereDate('complete_at', '>', Carbon::today())->orderBy('complete_at', 'desc')->get();
+    }
+
+    public function getCompletedTasksAttribute()
+    {
+        return $this->tasks()->where('is_complete', 1)->orderBy('complete_at', 'desc')->get();
     }
 }

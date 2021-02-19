@@ -15,9 +15,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    @stack('styles')
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -34,6 +35,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                      <li class="nav-item">
+                        <a class="nav-link {{ request()->is('*myhome*') ? 'active' : '' }}" href="/myhome">My Home</a>
+                      </li>
                       <li class="nav-item">
                         <a class="nav-link {{ request()->is('*tasks*') ? 'active' : '' }}" href="/tasks">Task Management</a>
                       </li>
@@ -80,4 +84,5 @@
         </main>
     </div>
 </body>
+@yield('scripts')
 </html>

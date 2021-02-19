@@ -15,10 +15,10 @@ class TaskController extends Controller
     	return $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
     	return view('tasks.index')->with([
-    		'tasks' => Task::all(),
+    		'tasks' => $request->user()->home->tasks,
     	]);
     }
 
@@ -39,6 +39,7 @@ class TaskController extends Controller
     	Task::create([
     		'name' => $request->name,
     		'frequency_id' => $request->frequency,
+            'home_id' => $request->user()->home->id,
     	]);
 
     	return redirect('/tasks');
@@ -69,6 +70,7 @@ class TaskController extends Controller
         Task::where('id', $taskId)->update([
             'name' => $request->name,
             'frequency_id' => $request->frequency,
+            'home_id' => $request->user()->home->id,
         ]);
 
         return redirect('/tasks');

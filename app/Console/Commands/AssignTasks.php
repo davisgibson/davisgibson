@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\User;
 use App\Task;
+use App\Home;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -40,17 +41,25 @@ class AssignTasks extends Command
      */
     public function handle()
     {
-        $this->assignTasks();
+        $this->start();
     }
 
     public function fire()
     {
-        $this->assignTasks();
+        $this->start();
     }
 
-    public function assignTasks()
+    public function start()
     {
-        foreach(Task::all() as $task)
+        foreach(Home::whereHas('users')->get() as $home)
+        {
+            $this->assignTasks($home->tasks);
+        }
+    }
+
+    public function assignTasks($tasks)
+    {
+        foreach($tasks as $task)
         {
             if(!$task->has_current_assignee)
             {
@@ -61,18 +70,19 @@ class AssignTasks extends Command
 
     public function assignTask($task)
     {
-        $user = $task->next_user;
-        if( ! $user)
-            $user = $this->getBestUser();
+        if($task->has_everyone_done_this)
+            $user = $task->next_user_in_rotation;
+        else
+            $user = $this->getBestUser($task->home);
         $user->tasks()->attach([ $task->id => [
             'complete_at' => Carbon::parse($task->last_complete)->addDays($task->frequency->days),
         ]]);
     }
 
-    public function getBestUser()
+    public function getBestUser($home)
     {
-        return User::all()->sortBy(function ($user) {
-            return $user->todays_tasks->count();
+        return $home->users->sortBy(function ($user) {
+            return $user->upcoming_tasks->count() + 1;
         })->first();
     }
 
