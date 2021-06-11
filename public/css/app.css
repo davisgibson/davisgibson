@@ -51,11 +51,6 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-a.nav-link {
-  font-size: 1.1em;
-  transform: translateY(2px);
-}
-
 article,
 aside,
 figcaption,

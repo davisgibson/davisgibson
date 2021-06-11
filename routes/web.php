@@ -35,3 +35,5 @@ Route::post('/onboarding/code', 'UserController@assignHome');
 Route::post('/onboarding/create', 'UserController@newHome');
 
 Route::get('/myhome', 'HomeController@index');
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile/update','ProfileController@updateProfile')->name('profile.update');

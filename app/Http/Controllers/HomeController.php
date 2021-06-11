@@ -30,6 +30,6 @@ class HomeController extends Controller
 
     public function dashboard(Request $request)
     {
-        return view('home');
+        return view('home', compact('users'));
     }
 }

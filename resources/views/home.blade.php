@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        {{-- <div class="col-md-8">
             <h4 class="mb-3"><b>{{ __('Dashboard') }}</b></h4>
             <div class="card mb-3">
                 <span class="card-header text-center" style="font-size: 1.2em;">Today's Tasks</span>
@@ -54,7 +54,11 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
+
+        <img class="images" id="image" src="{{ asset($user->profilepic) }}"/>
+
+
     </div>
 </div>
 @endsection

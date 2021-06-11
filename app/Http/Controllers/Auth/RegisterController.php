@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required'],
+            'agent' => ['required'],
         ]);
     }
 
@@ -63,13 +64,22 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+
+
     protected function create(array $data)
     {
+       $checked = $data['agent'];
+       if($data['agent'] == 'on'){
+         $checked = 1;
+       }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
+            'agent' => $checked,
         ]);
     }
 }

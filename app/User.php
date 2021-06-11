@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'is_admin', 'home_id'
+        'name', 'email', 'password', 'phone', 'is_admin', 'home_id', 'agent', 'profilepic',
     ];
 
     /**
@@ -47,6 +47,10 @@ class User extends Authenticatable
     public function home()
     {
         return $this->belongsTo(Home::class);
+    }
+
+    public function getImageAttribute(){
+        return $this->profilepic;
     }
 
     public function getTodaysTasksAttribute()
