@@ -7159,7 +7159,14 @@ button.bg-dark:focus {
 }
 
 .rounded-circle {
+  object-fit:cover !important;
   border-radius: 50% !important;
+  width: 15vw !important;
+  height: 15vw !important;
+}
+
+.banner-text {
+  font-size: 5em !important;
 }
 
 .rounded-pill {
@@ -10881,4 +10888,3 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
-
