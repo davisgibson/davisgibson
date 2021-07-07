@@ -35,7 +35,11 @@ class HousesController extends Controller
           Mapper::location($homes->address)->streetview(1, 1, ['ui' => false]);
         }
 
+        $owned = false;
+        if ($homes->owner == Auth::id()){
+          $owned = true;
+        }
 
-        return view('housePage', ['id'=>end($URLpart),'null'=>empty($homes)]);
+        return view('housePage', ['id'=>end($URLpart),'null'=>empty($homes),'owned'=>$owned,'user'=>Auth::id()]);
     }
 }

@@ -10,6 +10,9 @@
       @else
         <p> Home not found. </p>
       @endif
+      @if ($owned == true)
+        <a href="/houses/{{$id}}/upload">Edit House Listing</a>
+      @endif
     </div>
 </div>
 @endsection
