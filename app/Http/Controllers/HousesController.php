@@ -40,6 +40,8 @@ class HousesController extends Controller
           $owned = true;
         }
 
-        return view('housePage', ['id'=>end($URLpart),'null'=>empty($homes),'owned'=>$owned,'user'=>Auth::id()]);
+        $sale = $homes->ForSale;
+
+        return view('housePage', ['id'=>end($URLpart),'null'=>empty($homes),'owned'=>$owned,'user'=>Auth::id(),'sale'=>$sale]);
     }
 }

@@ -48,4 +48,6 @@ Route::post('/houses/{id}/upload/upload','HouseUploadController@uploadFiles')->n
 Route::get('/settings','SettingsController@index')->name('settings');
 Route::post('/settings','SettingsController@update')->name('settings.update');
 
-Route::get('welcome','HomepageController@index');
+Route::get('/welcome','HomepageController@index');
+Route::get('/listing/{id}/buy','ListingController@index')->name('listing');
+Route::post('/listing/{id}/buy/buy','ListingController@purchase')->name('listing.purchase');

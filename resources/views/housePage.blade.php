@@ -13,6 +13,9 @@
       @if ($owned == true)
         <a href="/houses/{{$id}}/upload">Edit House Listing</a>
       @endif
+      @if ($sale==true)
+        <a href="/listing/{{$id}}/buy">Check Property Listing</a>
+      @endif
     </div>
 </div>
 @endsection
