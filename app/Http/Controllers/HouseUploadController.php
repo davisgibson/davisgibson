@@ -36,6 +36,8 @@ class HouseUploadController extends Controller
         $request->validate([
             'profile_image'     =>  'image',
             'report_file'       =>  'file',
+            'bed'               =>  'numeric|nullable',
+            'baths'             =>  'numeric|nullable',
         ]);
 
         // Get current user
@@ -50,10 +52,57 @@ class HouseUploadController extends Controller
         }
 
         if($request->submit == "update"){
+            $checked = $request['selling'];
+            if($request['selling'] == 'on'){
+              $checked = 1;
+            }
+
+            DB::update('update properties set ForSale = ? where id = ?',[$checked, $house]);
+
+            DB::update('update properties set type = ? where id = ?',[$request->prop, $house]);
 
             if ($request->has('address')){
               if(!empty($request->address)){
                 DB::update('update properties set address = ? where id = ?',[$request->address, $house]);
+              }
+            }
+
+            if ($request->has('description')){
+              if(!empty($request->description)){
+                DB::update('update properties set description = ? where id = ?',[$request->description, $house]);
+              }
+            }
+
+            if ($request->has('footage')){
+              if(!empty($request->footage)){
+                DB::update('update properties set footage = ? where id = ?',[$request->footage, $house]);
+              }
+            }
+
+            if ($request->has('bed')){
+              if(!empty($request->bed)){
+                DB::update('update properties set bed = ? where id = ?',[$request->bed, $house]);
+              }
+            }
+
+            if ($request->has('bath')){
+              if(!empty($request->bath)){
+                DB::update('update properties set bath = ? where id = ?',[$request->bath, $house]);
+              }
+            }
+
+            if ($request->has('listPrice')){
+              if(!empty($request->listPrice)){
+                DB::update('update properties set listPrice = ? where id = ?',[$request->listPrice, $house]);
+              }
+            }
+
+            if ($request->has('cashPrice')){
+              if(!empty($request->cashPrice)){
+                DB::update('update properties set cashPrice = ? where id = ?',[$request->cashPrice, $house]);
+              }
+              else{
+                DB::update('update properties set cashPrice = ? where id = ?',[NULL, $house]);
               }
             }
 
@@ -90,11 +139,11 @@ class HouseUploadController extends Controller
               // Get image file
               $file = $request->file('report_file');
               // Define folder path
-              $folder = '/uploads/houses/' . $house . "/";
+              $folder = '/uploads/reports/' . $house . "/";
               $name = 'report';
               $filePath = $folder . $name. '.' . $file->getClientOriginalExtension();
               // Upload image
-              $this->uploadOne($image, $folder, 'public', $name);
+              $this->uploadOne($file, $folder, 'public', $name);
             }
           }
 

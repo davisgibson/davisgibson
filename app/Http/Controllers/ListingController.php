@@ -60,6 +60,11 @@ class ListingController extends Controller
             'bid'     =>  'numeric|gt:0|nullable'
         ]);
 
+        $checked = $request['anon'];
+        if($request['anon'] == 'on'){
+          $checked = 1;
+        }
+
         // Get current user
         $currentURL = url()->current();
         $URLpart = explode("/", $currentURL);
@@ -79,7 +84,7 @@ class ListingController extends Controller
           $bid = $request->bid;
           $homeid = $homes->id;
 
-          $data = array('bidder' => $buyer, 'bid' => $bid, 'property' => $homeid);
+          $data = array('bidder' => $buyer, 'bid' => $bid, 'property' => $homeid, 'anon'=>$anon);
           DB::table('bids')->insert($data);
         }
 
@@ -89,7 +94,7 @@ class ListingController extends Controller
           $price = $homes->cashPrice;
           $homeid = $homes->id;
 
-          $data = array('buyer' => $buyer, 'seller' => $seller, 'moneyTransfer' => $price, 'houseid' => $homeid);
+          $data = array('buyer' => $buyer, 'seller' => $seller, 'moneyTransfer' => $price, 'houseid' => $homeid, 'anon'=>$anon);
 
           DB::table('escrow')->insert($data);
 
@@ -116,8 +121,9 @@ class ListingController extends Controller
               $buyer = $bid->bidder;
               $price = $bid->bid;
               $homeid = $homes->id;
+              $anon = $bid->anon
 
-              $data = array('buyer' => $buyer, 'seller' => $seller, 'moneyTransfer' => $price, 'houseid' => $homeid);
+              $data = array('buyer' => $buyer, 'seller' => $seller, 'moneyTransfer' => $price, 'houseid' => $homeid, 'anon'=>$anon);
 
               DB::table('escrow')->insert($data);
 

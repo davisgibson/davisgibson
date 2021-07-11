@@ -38,6 +38,61 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="footage" class="col-md-4 col-form-label text-md-right">Footage</label>
+                                            <div class="col-md-6">
+                                                <input id="footage" type="text" class="form-control" name="footage" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="bed" class="col-md-4 col-form-label text-md-right">Beds</label>
+                                            <div class="col-md-6">
+                                                <input id="bed" type="text" class="form-control" name="bed" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="bath" class="col-md-4 col-form-label text-md-right">Baths</label>
+                                            <div class="col-md-6">
+                                                <input id="bath" type="text" class="form-control" name="bath" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+                                            <div class="col-md-6">
+                                                <input id="description" type="text" class="form-control" name="description" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="listPrice" class="col-md-4 col-form-label text-md-right">List Price $</label>
+                                            <div class="col-md-6">
+                                                <input id="listPrice" type="text" class="form-control" name="listPrice" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="cashPrice" class="col-md-4 col-form-label text-md-right">Cash Price $</label>
+                                            <div class="col-md-6">
+                                                <input id="cashPrice" type="text" class="form-control" name="cashPrice" value="">
+                                                <p>If left blank, there will be not cash price.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="selling" class="col-md-4 col-form-label text-md-right">For Sale?</label>
+
+                                            <div class="col-md-6">
+                                                <input type="hidden" name="selling" value="1">
+                                                <input id="selling" name="selling" type="checkbox" class="form-control" name="selling">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-0">
+                                          <p>Residential or Comercial?</p>
+                                            <div class="col-md-8 offset-md-4">
+
+                                              <input type="radio" id="residential" name="prop" value="residential" checked="checked">
+                                              <label for="residential">Residential</label><br>
+                                              <input type="radio" id="comercial" name="prop" value="comercial">
+                                              <label for="comercial">Comercial</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="profile_image" class="col-md-4 col-form-label text-md-right">Images</label>
                                             <div class="col-md-6">
                                                 <input id="profile_image" type="file" class="form-control" name="profile_image">

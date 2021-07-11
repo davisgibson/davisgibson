@@ -31,5 +31,24 @@
         @endforeach
       </tbody>
     </table>
+
+
+
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($events as $event)
+          <tr>
+            <td>{{ $event['address'] }}</td>
+            <td>{{ $event['status'] }}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
 </div>
 @endsection

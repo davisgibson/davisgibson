@@ -33,6 +33,14 @@
                       <button type="submit" class="btn btn-primary" name="submit" value="bid">Bid on Property</button>
                   </div>
               </div>
+              <div class="form-group row">
+                  <label for="anon" class="col-md-4 col-form-label text-md-right">Purchase/Bid Anonymously</label>
+
+                  <div class="col-md-6">
+                      <input type="hidden" name="selling" value="0">
+                      <input id="anon" name="anon" type="checkbox" class="form-control">
+                  </div>
+              </div>
               @if($afford == true)
               <div class="form-group row mb-0 mt-5">
                 <div class="col-md-8 offset-md-4">
@@ -51,11 +59,10 @@
           @foreach($bids as $bid)
             <form action="{{ route('listing.purchase',$id) }}" method="POST">
               @csrf
-              <div class="row">
                 <p><b>Name: </b>{{$bid->bidder}}</p>
                 <p><b>Bid: </b>{{$bid->bid}}</p>
                 <button type="submit" class="btn btn-primary" name="submit" value="{{$bid->id}}">Accept Bid</button>
-              </div>
+                <hr>
             </form>
           @endforeach
         @endif
@@ -67,7 +74,7 @@
         <h1>This property is not for sale</h1>
       @endif
 
-      <p>{{$status ?? ''}}</p>
-      <p>{{$id}}</p>
+      {{-- <p>{{$status ?? ''}}</p>
+      <p>{{$id}}</p> --}}
 </div>
 @endsection

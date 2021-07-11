@@ -42,6 +42,7 @@ Route::get('/house','HouseController@index')->name('house');
 Route::post('/house','HouseController@insert')->name('regHouse');
 
 Route::get('/houses/{id}','HousesController@index');
+Route::get('{file}','HousesController@download')->name('download');
 Route::get('/houses/{id}/upload','HouseUploadController@index')->name('houseUp');
 Route::post('/houses/{id}/upload/upload','HouseUploadController@uploadFiles')->name('house.update');
 

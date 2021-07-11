@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mapper;
+use Illuminate\Support\Facades\Storage;
 
 class HousesController extends Controller
 {
@@ -40,8 +41,26 @@ class HousesController extends Controller
           $owned = true;
         }
 
+        $folder = "/uploads/houses/".$homes->id."/";
+        $files = Storage::disk('public')->files($folder);
+        $allFiles = array();
+        foreach($files as $file){
+          $new = "/storage/" . $file;
+          $allFiles[] = $new;
+        }
         $sale = $homes->ForSale;
 
-        return view('housePage', ['id'=>end($URLpart),'null'=>empty($homes),'owned'=>$owned,'user'=>Auth::id(),'sale'=>$sale]);
+        $report = "uploads/reports/".$homes->id."/";
+        $report = Storage::disk('public')->files($report);
+        if (!empty($report)){
+          $report = $report[0];
+          $report = "/storage/" . $report;
+        }
+
+        return view('housePage', ['id'=>end($URLpart),'null'=>empty($homes),'owned'=>$owned,'user'=>Auth::id(),'sale'=>$sale,'files'=>$allFiles, 'report'=>$report]);
+    }
+
+    public function download($file){
+      return response()->file($file);
     }
 }
